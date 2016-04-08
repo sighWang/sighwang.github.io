@@ -1,16 +1,31 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <meta property="wb:webmaster" content="1b1ccabc5cf0e5a1" />
-    <meta property="qc:admins" content="15442271050716767140526177" />
-    <title>王西明的博客</title>
-  </head>
-  <body>
-    <a href="http://wangximing.github.io/">王西明的博客</a>
-    <a href="https://api.weibo.com/oauth2/authorize?client_id=4156352868&response_type=code&redirect_uri=http://sighwang.github.io/
+
+<head>
+  <meta charset="utf-8">
+  <meta property="wb:webmaster" content="1b1ccabc5cf0e5a1" />
+  <meta property="qc:admins" content="15442271050716767140526177" />
+  <script type="text/javascript" src="jquery.js" charset="utf-8"></script>
+  <script type="text/javascript">
+    var QQClienId = 101306424;
+    var redirectUri = 'http://sighwang.github.io/';
+
+    $("#qq").click(function() {
+      location.href = 'https://graph.qq.com/oauth2.0/authorize?response_type=token&client_id='+QQClienId +
+      '&redirect_uri='+ redirectUri +'http://sighwang.github.io/' +
+      'state=' + Math.random();
+    });
+  </script>
+  <title>王西明的博客</title>
+</head>
+
+<body>
+  <a href="http://wangximing.github.io/">王西明的博客</a>
+  <a href="https://api.weibo.com/oauth2/authorize?client_id=4156352868&response_type=code&redirect_uri=http://sighwang.github.io/
 ">微博登录</a>
-    <a href="https://graph.qq.com/oauth2.0/authorize?response_type=token&client_id=101306424&redirect_uri=http://sighwang.github.io/">qq登录</a>
-    <a href="https://github.com/login/oauth/authorize">github登录</a>
-  </body>
+  <button type="button" name="button" id="qq">QQ</button>
+  <a href="https://graph.qq.com/oauth2.0/authorize?response_type=token&client_id=101306424&redirect_uri=http://sighwang.github.io/">qq登录</a>
+  <a href="https://github.com/login/oauth/authorize">github登录</a>
+</body>
+
 </html>
