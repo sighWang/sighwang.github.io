@@ -14,10 +14,9 @@
       var redirectUri = 'http://sighwang.github.io/';
       var state = Math.random();
 
-      var accessTokenUri = 'https://graph.qq.com/oauth2.0/me?access_token=';
+      var accessTokenUri = 'https://graph.qq.com/oauth2.0/me';
 
       $("#qq").click(function() {
-        //https://graph.qq.com/oauth/show?which=Login&display=pc&response_type=token&client_id=101306424&redirect_uri=http://sighwang.github.io/
         location.href = 'https://graph.qq.com/oauth2.0/authorize?response_type=token&client_id=' + QQClienId +
           '&redirect_uri=' + redirectUri + '&state=' + state;
       });
@@ -34,15 +33,17 @@
         return vars;
       }
 
-      if(getUrlVars()[state] = state) {
+//      if(getUrlVars()[state] = state) {
         console.log('使用Access Token来获取用户的OpenID\n' + state);
         // $.get('https://graph.qq.com/oauth2.0/token?grant_type=authorization_code&' +
         // 'client_id=' + QQClienId +
         // '&redirect_uri=' +  redirectUri +
         // '&client_secret=' + appSecret + '&code=' +  $code）;
 
-        $.get(accessTokenUri)
-      }
+        $.get(accessTokenUri+ '?access_token' + getUrlVars()[access_token], function(data) {
+          console.log(data);
+        });
+//      }
     });
   </script>
   <title>王西明的博客</title>
