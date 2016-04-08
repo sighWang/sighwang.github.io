@@ -3,8 +3,8 @@
 
 <head>
   <meta charset="utf-8">
-  <meta property="wb:webmaster" content="1b1ccabc5cf0e5a1" />
-  <meta property="qc:admins" content="15442271050716767140526177" />
+  <meta property="wb:webmaster" content="1b1ccabc5cf0e5a1"/>
+  <meta property="qc:admins" content="15442271050716767140526177"/>
   <script type="text/javascript" src="jquery.js" charset="utf-8"></script>
   <script type="text/javascript">
     $(document).ready(function() {
@@ -14,16 +14,41 @@
       var redirectUri = 'http://sighwang.github.io/';
       var state = Math.random();
 
+
+      var tokenUri = 'https://graph.qq.com/oauth2.0/token?grant_type=authorization_code&' +
+          'client_id=' + QQClienId +
+          '&client_secret=' + appSecret +
+          '&code=' + getUrlVars()[code] +
+          '&state=' + state +
+          '&redirect_uri=' + redirectUri;
       var accessTokenUri = 'https://graph.qq.com/oauth2.0/me';
 
+
+      //Step1：获取Authorization Code
+      //跳转到授权页面获取授权, 带回Authorization Code
       $("#qq").click(function() {
         location.href = 'https://graph.qq.com/oauth2.0/authorize?response_type=token&client_id=' + QQClienId +
-          '&redirect_uri=' + redirectUri + '&state=' + state;
+            '&redirect_uri=' + redirectUri + '&state=' + state;
       });
+
+      //Step2：获取Access Token
+      //根据clientId,client_secret,Authorization Code, redirect_uri获取Access Token
+      $.get(tokenUri, function(data) {
+        console.log(data);
+      });
+
+      //Step3：获取OpenId和ClientId
+      //根据Access Token 获取OpenId和ClientId
+      console.log('使用Access Token来获取用户的OpenID\n' + state);
+      $.get(accessTokenUri + '?access_token=' + getUrlVars()['#access_token'], function(data) {
+        console.log(data);
+      });
+
+      //Step4：使用Access Token以及OpenID来访问和修改用户数据
 
       function getUrlVars() {
         var vars = [],
-          hash;
+            hash;
         var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
         for (var i = 0; i < hashes.length; i++) {
           hash = hashes[i].split('=');
@@ -32,30 +57,17 @@
         }
         return vars;
       }
-
-//      if(getUrlVars()[state] = state) {
-        console.log('使用Access Token来获取用户的OpenID\n' + state);
-        // $.get('https://graph.qq.com/oauth2.0/token?grant_type=authorization_code&' +
-        // 'client_id=' + QQClienId +
-        // '&redirect_uri=' +  redirectUri +
-        // '&client_secret=' + appSecret + '&code=' +  $code）;
-        console.log(getUrlVars());
-        $.get(accessTokenUri+ '?access_token=' + getUrlVars()['#access_token'], function(data) {
-          console.log(data);
-        });
-//      }
     });
   </script>
   <title>王西明的博客</title>
 </head>
 
 <body>
-  <a href="http://wangximing.github.io/">王西明的博客</a>
-  <a href="https://api.weibo.com/oauth2/authorize?client_id=4156352868&response_type=code&redirect_uri=http://sighwang.github.io/
+<a href="http://wangximing.github.io/">王西明的博客</a>
+<a href="https://api.weibo.com/oauth2/authorize?client_id=4156352868&response_type=code&redirect_uri=http://sighwang.github.io/
 ">微博登录</a>
-  <button type="button" name="button" id="qq">QQ</button>
-  <a href="https://graph.qq.com/oauth2.0/authorize?response_type=token&client_id=101306424&redirect_uri=http://sighwang.github.io/">qq登录</a>
-  <a href="https://github.com/login/oauth/authorize">github登录</a>
+<button type="button" name="button" id="qq">QQ</button>
+<a href="https://graph.qq.com/oauth2.0/authorize?response_type=token&client_id=101306424&redirect_uri=http://sighwang.github.io/">qq登录</a>
+<a href="https://github.com/login/oauth/authorize">github登录</a>
 </body>
-
-</html>
+< / html >
