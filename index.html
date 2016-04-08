@@ -8,15 +8,41 @@
   <script type="text/javascript" src="jquery.js" charset="utf-8"></script>
   <script type="text/javascript">
     $(document).ready(function() {
-      var QQClienId = 101306424;
+      var QQClienId = '101306424';
+      var appSecret = '8ae2e2320371b2a44dfc10f387c7aafb';
+
       var redirectUri = 'http://sighwang.github.io/';
+      var state = Math.random();
+
+      var accessTokenUri = 'https://graph.qq.com/oauth2.0/me?access_token=';
 
       $("#qq").click(function() {
         //https://graph.qq.com/oauth/show?which=Login&display=pc&response_type=token&client_id=101306424&redirect_uri=http://sighwang.github.io/
         location.href = 'https://graph.qq.com/oauth2.0/authorize?response_type=token&client_id=' + QQClienId +
-          '&redirect_uri=' + redirectUri
-           +'&state=' + Math.random();
+          '&redirect_uri=' + redirectUri + '&state=' + state;
       });
+
+      function getUrlVars() {
+        var vars = [],
+          hash;
+        var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
+        for (var i = 0; i < hashes.length; i++) {
+          hash = hashes[i].split('=');
+          vars.push(hash[0]);
+          vars[hash[0]] = hash[1];
+        }
+        return vars;
+      }
+
+      if(getUrlVars()[state] = state) {
+        console.log('使用Access Token来获取用户的OpenID\n' + state);
+        // $.get('https://graph.qq.com/oauth2.0/token?grant_type=authorization_code&' +
+        // 'client_id=' + QQClienId +
+        // '&redirect_uri=' +  redirectUri +
+        // '&client_secret=' + appSecret + '&code=' +  $code）;
+
+        $.get(accessTokenUri)
+      }
     });
   </script>
   <title>王西明的博客</title>
