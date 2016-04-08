@@ -14,7 +14,7 @@
       $("#qq").click(function() {
         location.href = 'https://graph.qq.com/oauth2.0/authorize?response_type=token&client_id=' + QQClienId +
           '&redirect_uri=' + redirectUri + 'http://sighwang.github.io/' +
-          'state=' + Math.random();
+          '&state=' + Math.random();
       });
     });
   </script>
