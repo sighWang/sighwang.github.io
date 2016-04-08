@@ -40,7 +40,7 @@
         // '&redirect_uri=' +  redirectUri +
         // '&client_secret=' + appSecret + '&code=' +  $code）;
         console.log(getUrlVars());
-        $.get(accessTokenUri+ '?access_token' + getUrlVars()[access_token], function(data) {
+        $.get(accessTokenUri+ '?access_token' + getUrlVars()['#access_token'], function(data) {
           console.log(data);
         });
 //      }
