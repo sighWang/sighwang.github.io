@@ -7,13 +7,15 @@
   <meta property="qc:admins" content="15442271050716767140526177" />
   <script type="text/javascript" src="jquery.js" charset="utf-8"></script>
   <script type="text/javascript">
-    var QQClienId = 101306424;
-    var redirectUri = 'http://sighwang.github.io/';
+    $(document).ready(function() {
+      var QQClienId = 101306424;
+      var redirectUri = 'http://sighwang.github.io/';
 
-    $("#qq").click(function() {
-      location.href = 'https://graph.qq.com/oauth2.0/authorize?response_type=token&client_id='+QQClienId +
-      '&redirect_uri='+ redirectUri +'http://sighwang.github.io/' +
-      'state=' + Math.random();
+      $("#qq").click(function() {
+        location.href = 'https://graph.qq.com/oauth2.0/authorize?response_type=token&client_id=' + QQClienId +
+          '&redirect_uri=' + redirectUri + 'http://sighwang.github.io/' +
+          'state=' + Math.random();
+      });
     });
   </script>
   <title>王西明的博客</title>
